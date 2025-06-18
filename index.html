@@ -17,6 +17,8 @@
     }
     .container {
       text-align: center;
+      width: 90%;
+      max-width: 400px;
     }
     .card {
       display: none;
@@ -35,7 +37,8 @@
       border: none;
       border-radius: 8px;
       font-size: 1em;
-      margin-right: 0.5em;
+      margin-bottom: 1em;
+      width: 80%;
     }
     button {
       padding: 0.5em 1em;
@@ -45,6 +48,8 @@
       color: #fff;
       font-size: 1em;
       cursor: pointer;
+      width: 80%;
+      margin-top: 0.5em;
     }
     button:hover {
       background-color: #ff477e;
@@ -52,9 +57,22 @@
     a.download-link {
       display: block;
       margin-top: 1em;
-      color: #fff;
+      color: #ff6f91;
       text-decoration: underline;
       font-size: 0.9em;
+    }
+    img.birthday-photo {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1em;
+      border: 4px solid #ff9a9e;
+    }
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.5em;
+      }
     }
   </style>
 </head>
@@ -66,18 +84,36 @@
     </div>
     <div class="card" id="giftCard">
       <h1>🎉 Happy Birthday <span id="userName"></span>! 🎉</h1>
+      <img src="jay.png.jpeg jay.png2.jpeg joy.png (2).jpeg joy.png.jpeg" alt="Birthday Boy" class="birthday-photo" />
       <p>Wishing you a day filled with love, joy, and surprises!</p>
-      <a class="download-link" href="data:text/html;charset=utf-8,<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Gift Card</title></head><body style='display:flex;justify-content:center;align-items:center;height:100vh;background:#ff9a9e;color:#fff;font-size:2em;font-family:sans-serif;'>🎉 Happy Birthday! 🎉</body></html>" download="birthday_card.html">Download Gift Card</a>
+      <a class="download-link" id="downloadLink" href="#" download="birthday_card.html">Download Gift Card</a>
     </div>
   </div>
 
   <script>
     function showCard() {
-      const name = document.getElementById("nameInput").value;
-      if (name.trim() !== "") {
+      const name = document.getElementById("nameInput").value.trim();
+      if (name !== "") {
         document.getElementById("userName").innerText = name;
         document.querySelector(".input-area").style.display = "none";
         document.getElementById("giftCard").style.display = "block";
+
+        const cardHTML = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Gift Card</title>
+</head>
+<body style='display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:#ff9a9e;color:#fff;font-size:2em;font-family:sans-serif;'>
+  <h1>🎉 Happy Birthday ${name}! 🎉</h1>
+  <img src="jay.png.jpeg jay.png2.jpeg joy.png (2).jpeg joy.png.jpeg" style="width:150px;height:150px;border-radius:50%;margin:1em auto;" alt="Birthday Boy" />
+</body>
+</html>`;
+
+        const encoded = "data:text/html;charset=utf-8," + encodeURIComponent(cardHTML);
+        document.getElementById("downloadLink").href = encoded;
       } else {
         alert("Please enter your name!");
       }
