@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Gift Card</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: sans-serif;
+    }
+    .container {
+      text-align: center;
+    }
+    .card {
+      display: none;
+      padding: 2em;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    input {
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      margin-right: 0.5em;
+    }
+    button {
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff6f91;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff477e;
+    }
+    a.download-link {
+      display: block;
+      margin-top: 1em;
+      color: #fff;
+      text-decoration: underline;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="input-area">
+      <input type="text" id="nameInput" placeholder="Enter your name" />
+      <button onclick="showCard()">Open Gift Card</button>
+    </div>
+    <div class="card" id="giftCard">
+      <h1>🎉 Happy Birthday <span id="userName"></span>! 🎉</h1>
+      <p>Wishing you a day filled with love, joy, and surprises!</p>
+      <a class="download-link" href="data:text/html;charset=utf-8,<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Gift Card</title></head><body style='display:flex;justify-content:center;align-items:center;height:100vh;background:#ff9a9e;color:#fff;font-size:2em;font-family:sans-serif;'>🎉 Happy Birthday! 🎉</body></html>" download="birthday_card.html">Download Gift Card</a>
+    </div>
+  </div>
+
+  <script>
+    function showCard() {
+      const name = document.getElementById("nameInput").value;
+      if (name.trim() !== "") {
+        document.getElementById("userName").innerText = name;
+        document.querySelector(".input-area").style.display = "none";
+        document.getElementById("giftCard").style.display = "block";
+      } else {
+        alert("Please enter your name!");
+      }
+    }
+  </script>
+</body>
+</html>
